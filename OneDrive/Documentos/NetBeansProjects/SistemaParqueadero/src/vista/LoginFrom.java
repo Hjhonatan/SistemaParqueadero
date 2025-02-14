@@ -1,7 +1,7 @@
 package vista;
 
 public class LoginFrom extends javax.swing.JFrame {
-    
+
     public LoginFrom() {
         initComponents();
         this.setTitle("Sistema de Parqueadero");
