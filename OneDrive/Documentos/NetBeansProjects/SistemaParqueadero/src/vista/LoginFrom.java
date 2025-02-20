@@ -1,5 +1,9 @@
 package vista;
+
+import controlador.UsuarioControlador;
 import javax.swing.JOptionPane;
+import modelo.Usuario;
+
 public class LoginFrom extends javax.swing.JFrame {
 
     public LoginFrom() {
@@ -24,8 +28,8 @@ public class LoginFrom extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField_usuario = new javax.swing.JTextField();
-        jPasswordField_contraseña = new javax.swing.JPasswordField();
         jButton_acceder = new javax.swing.JButton();
+        jPasswordField_contraseña = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -66,16 +70,21 @@ public class LoginFrom extends javax.swing.JFrame {
         });
         jPanel1.add(jTextField_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 240, 30));
 
-        jPasswordField_contraseña.setBackground(new java.awt.Color(153, 255, 255));
-        jPasswordField_contraseña.setForeground(new java.awt.Color(0, 0, 0));
-        jPasswordField_contraseña.setText("jPasswordField1");
-        jPanel1.add(jPasswordField_contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, 30));
+        jButton_acceder.setText("Iniciar sesion");
+        jButton_acceder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_accederActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton_acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
-        jButton_acceder.setBackground(new java.awt.Color(0, 102, 102));
-        jButton_acceder.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton_acceder.setForeground(new java.awt.Color(0, 0, 0));
-        jButton_acceder.setText("Iniciar Sesion");
-        jPanel1.add(jButton_acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 135, 30));
+        jPasswordField_contraseña.setText("jPasswordField1");
+        jPasswordField_contraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField_contraseñaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jPasswordField_contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 550));
 
@@ -117,6 +126,14 @@ public class LoginFrom extends javax.swing.JFrame {
     private void jTextField_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_usuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_usuarioActionPerformed
+
+    private void jButton_accederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_accederActionPerformed
+        this.IniciarSesion();
+    }//GEN-LAST:event_jButton_accederActionPerformed
+
+    private void jPasswordField_contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField_contraseñaActionPerformed
+
+    }//GEN-LAST:event_jPasswordField_contraseñaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,20 +186,26 @@ public class LoginFrom extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_usuario;
     // End of variables declaration//GEN-END:variables
 //metodo para iniciar sesion 
-    private void IniciarSesion (){
-        if (jTextField_usuario.getText().isEmpty() && jPasswordField_contraseña.getText().isEmpty()){
-        JOptionPane.showMessageDialog(null, "Ingrese su usuario y conttraseña");
+    private void IniciarSesion() {
+        if (jTextField_usuario.getText().isEmpty() && jPasswordField_contraseña.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese su usuario y conttraseña");
 
-        }else {
-       UsuarioControlador ControlUsuario = new UsuarioControlador (); 
-       usuario usuario = new usuario ();
-       usuario.setUsuario(jTextField_usuario.getText().trim());
-       Usuario.setContraseña.(jPasswordField_contraseña.getText().trim())
+        } else {
+            UsuarioControlador ControlUsuario = new UsuarioControlador();
+            Usuario usuario = new Usuario();
+            usuario.setUsuario(jTextField_usuario.getText().trim());
+            usuario.setContraseña(jPasswordField_contraseña.getText().trim());
+            if (ControlUsuario.login(usuario)) {
+                System.out.println("Inicio de sesion exitoso");
+                JOptionPane.showMessageDialog(null, "Inicio de sesion exitoso");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "usuario o conttraseña invalidos");
+
+            }
+
         }
-}
-
-
-
+    }
 
 
 
