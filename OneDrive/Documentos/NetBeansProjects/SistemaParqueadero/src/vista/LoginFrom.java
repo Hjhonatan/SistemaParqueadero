@@ -1,5 +1,5 @@
 package vista;
-
+import javax.swing.JOptionPane;
 public class LoginFrom extends javax.swing.JFrame {
 
     public LoginFrom() {
@@ -168,4 +168,24 @@ public class LoginFrom extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField_contraseña;
     private javax.swing.JTextField jTextField_usuario;
     // End of variables declaration//GEN-END:variables
+//metodo para iniciar sesion 
+    private void IniciarSesion (){
+        if (jTextField_usuario.getText().isEmpty() && jPasswordField_contraseña.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Ingrese su usuario y conttraseña");
+
+        }else {
+       UsuarioControlador ControlUsuario = new UsuarioControlador (); 
+       usuario usuario = new usuario ();
+       usuario.setUsuario(jTextField_usuario.getText().trim());
+       Usuario.setContraseña.(jPasswordField_contraseña.getText().trim())
+        }
+}
+
+
+
+
+
+
+
+
 }
