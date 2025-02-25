@@ -58,7 +58,6 @@ public class LoginFrom extends javax.swing.JFrame {
 
         jTextField_usuario.setBackground(new java.awt.Color(153, 255, 255));
         jTextField_usuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField_usuario.setText("Alejandro");
         jTextField_usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_usuarioActionPerformed(evt);
@@ -74,7 +73,7 @@ public class LoginFrom extends javax.swing.JFrame {
         });
         jPanel1.add(jButton_acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
-        jPasswordField_contraseña.setText("1234");
+        jPasswordField_contraseña.setBackground(new java.awt.Color(153, 255, 255));
         jPasswordField_contraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField_contraseñaActionPerformed(evt);
@@ -94,7 +93,7 @@ public class LoginFrom extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/telefono.png"))); // NOI18N
-        jLabel5.setText("+57 323 524 2119 ");
+        jLabel5.setText("+57 315 894 3628 ");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -108,8 +107,8 @@ public class LoginFrom extends javax.swing.JFrame {
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel8.setText("Desarrollado por: Jhonatan Rojas y Alejandro Bonilla ");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, -1, -1));
+        jLabel8.setText("Desarrollado por: Jhonatan Rojas, Alejandro Bolillo y Carol Acosta");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 550, 550));
 
@@ -181,7 +180,7 @@ public class LoginFrom extends javax.swing.JFrame {
 //metodo para iniciar sesion 
     private void IniciarSesion() {
         if (jTextField_usuario.getText().isEmpty() && jPasswordField_contraseña.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese su usuario y conttraseña");
+            JOptionPane.showMessageDialog(null, "Ingrese su usuario y contraseña");
 
         } else {
             UsuarioControlador ControlUsuario = new UsuarioControlador();
