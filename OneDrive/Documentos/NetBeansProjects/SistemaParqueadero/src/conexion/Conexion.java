@@ -33,14 +33,6 @@ public class Conexion {
 
 }
 
-
-
-
-
-
-
-
-
 /*
     // Método para establecer la conexión con la base de datos
     public static Connection conectar() {
