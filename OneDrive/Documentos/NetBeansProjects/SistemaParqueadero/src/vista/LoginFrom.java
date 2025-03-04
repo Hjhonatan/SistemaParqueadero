@@ -108,7 +108,7 @@ public class LoginFrom extends javax.swing.JFrame {
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel8.setText("Desarrollado por: Jhonatan Rojas, Alejandro Bolillo y Carol Acosta");
+        jLabel8.setText("Desarrollado por: Jhonatan Rojas, Alejandro Bonillo y Carol Acosta");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 550, 550));
@@ -191,6 +191,11 @@ public class LoginFrom extends javax.swing.JFrame {
             if (ControlUsuario.login(usuario)) {
                 System.out.println("Inicio de sesion exitoso");
                 JOptionPane.showMessageDialog(null, "Inicio de sesion exitoso");
+                
+                MenuFrom menu = new MenuFrom();
+                menu.setVisible(true);
+                this.dispose();
+                
 
             } else {
                 JOptionPane.showMessageDialog(null, "usuario o conttraseña invalidos");
