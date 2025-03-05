@@ -1,4 +1,3 @@
-
 package modelo;
 
 /**
@@ -6,7 +5,7 @@ package modelo;
  * @author ALEJANDRO
  */
 public class Vehiculo {
-    
+
     private int idVehiculo;
     private String placa;
     private String propietario;
@@ -15,16 +14,16 @@ public class Vehiculo {
     private String horaSalida;
     private double valorPagado;
     private String estado;
-    
-    public Vehiculo(){
-        this.idVehiculo=0;
-        this.placa="";
-        this.propietario="";
-        this.tipoVehiculo="";
-        this.horaEntrada="";
-        this.horaSalida="";
-        this.valorPagado= 0.00;
-        this.estado="";
+
+    public Vehiculo() {
+        this.idVehiculo = 0;
+        this.placa = "";
+        this.propietario = "";
+        this.tipoVehiculo = "";
+        this.horaEntrada = "";
+        this.horaSalida = "";
+        this.valorPagado = 0.00;
+        this.estado = "";
     }
 
     public int getIdVehiculo() {
@@ -95,6 +94,5 @@ public class Vehiculo {
     public String toString() {
         return "Vehiculo{" + "idVehiculo=" + idVehiculo + ", placa=" + placa + ", propietario=" + propietario + ", tipoVehiculo=" + tipoVehiculo + ", horaEntrada=" + horaEntrada + ", horaSalida=" + horaSalida + ", valorPagado=" + valorPagado + ", estado=" + estado + '}';
     }
-            
-    
+
 }
