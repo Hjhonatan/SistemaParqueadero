@@ -4,6 +4,7 @@ import com.mysql.jdbc.PreparedStatement;
 import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Vehiculo;
 
@@ -42,6 +43,52 @@ public class VehiculoControlador {
         }
         return respuesta;
 
+    }
+    
+    //metodo para consuktar vehiculo 
+    public ArrayList<Vehiculo> listaVehiculo= new ArrayList <>();
+    
+    public ArrayList buscarVehiculosPlacasFecha (String placaPropietario, String fecha) {
+        String sql ="";
+        
+        fecha = fecha.replace("/", "-");
+        if (!placaPropietario.isEmpty() && !fecha.isEmpty()){
+            sql = "select * from tb_vehiculo where placa LIKE '%" + placaPropietario 
+                    + "%' OR propietario LIKE '%" + placaPropietario + "%' AND hora_entrada LIKE '" 
+                    + fecha + "%';";
+        } else if (!placaPropietario.isEmpty()){
+            sql = "select * from tb_vehiculo where placa LIKE '%" + placaPropietario 
+                    + "%' OR propietario LIKE '%" + placaPropietario + "%';";
+        }else if (!fecha.is)Empty(){
+        sql = "select * from tb_vehiculo where hora_entrada LIKE '" 
+                    + fecha + "%';";
+        }
+        
+        Statement st;
+        try {
+            connection cn = conexion.conectar():
+            st = cn.createStatement();
+            ResultSet rs = executequery (sql);
+            
+            Vehiculo vehiculo;
+            while (rs.next()){
+                vehiculo = new Vehiculo ();
+                vehiculo.setIdVehiculo(rs.getInt("id_vehiculo"));
+                vehiculo.setplaca(rs.getInt("placa"));
+                vehiculo.setPropietario(rs.getInt("propietario"));
+                vehiculo.setTipoVehiculo(rs.getInt("tipo_vehiculo"));
+                vehiculo.setHoraEntrada(rs.getInt("hora_entrada"));
+                vehiculo.setHoraSalida(rs.getInt("hora_salida"));
+                vehiculo.setValorPagado(rs.Double("valor_pagado"));
+                vehiculo.setEstado(rs.getInt("estado"));
+                
+                
+            
+                
+            }
+            
+            
+        }
     }
 
 }
