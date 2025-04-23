@@ -6,6 +6,8 @@ package vista;
 
 import conexion.Conexion;
 import controlador.VehiculoControlador;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -424,8 +426,23 @@ public class MenuFrom extends javax.swing.JFrame {
                 model.addRow(fila);
 
             }
-            
+
             jTextField_busqueda_criterio.setText("");
+             
+            
+            
+            jTable_vehiculos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila_point = jTable_vehiculos.rowAtPoint(e.getPoint());
+                int columna_point = 0;
+
+                if (fila_point > -1) {
+                    idVehiculo = (int) model.getValueAt(fila_point, columna_point);
+                    EnviarDatosVehiculoSeleccionado(idVehiculo);
+                }
+            }
+        });
         }
 
     }//GEN-LAST:event_jButton_buscarActionPerformed
@@ -496,38 +513,75 @@ public class MenuFrom extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //Metodo para mostrar todos los vehiculos registrados
- private void CargarTablaVehiculos() {
-    Connection cn = Conexion.conectar();
-    DefaultTableModel model = new DefaultTableModel();
-    String sql = "select id_vehiculo, placa, propietario, tipo_vehiculo, valor_pagado, estado from vehiculos";
-    Statement st;
-    try {
-        st = cn.createStatement();
-        ResultSet rs = st.executeQuery(sql);
-        this.jTable_vehiculos = new JTable(model);
-        this.jScrollPane1.setViewportView(this.jTable_vehiculos);
+    private void CargarTablaVehiculos() {
+        Connection cn = Conexion.conectar();
+        DefaultTableModel model = new DefaultTableModel();
+        String sql = "select id_vehiculo, placa, propietario, tipo_vehiculo, valor_pagado, estado from vehiculos";
+        Statement st;
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            this.jTable_vehiculos = new JTable(model);
+            this.jScrollPane1.setViewportView(this.jTable_vehiculos);
 
-        model.addColumn("N°"); // ID
-        model.addColumn("Placa");
-        model.addColumn("Propietario");
-        model.addColumn("Tipo de Vehículo");
-        model.addColumn("Valor Pagado");
-        model.addColumn("Estado");
+            model.addColumn("N°"); // ID
+            model.addColumn("Placa");
+            model.addColumn("Propietario");
+            model.addColumn("Tipo de Vehículo");
+            model.addColumn("Valor Pagado");
+            model.addColumn("Estado");
 
-        while (rs.next()) {
-            Object fila[] = new Object[6]; // Cambiado a tamaño 6
-            for (int i = 0; i < 6; i++) { // Ajustado para recorrer solo 6 columnas
-                fila[i] = rs.getObject(i + 1);
+            while (rs.next()) {
+                Object fila[] = new Object[6]; // Cambiado a tamaño 6
+                for (int i = 0; i < 6; i++) { // Ajustado para recorrer solo 6 columnas
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
             }
-            model.addRow(fila);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los vehículos: " + e.getMessage());
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error al cargar los vehículos: " + e.getMessage());
-        e.printStackTrace();
+
+        //evento
+        jTable_vehiculos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila_point = jTable_vehiculos.rowAtPoint(e.getPoint());
+                int columna_point = 0;
+
+                if (fila_point > -1) {
+                    idVehiculo = (int) model.getValueAt(fila_point, columna_point);
+                    EnviarDatosVehiculoSeleccionado(idVehiculo);
+                }
+            }
+        });
+
+    }
+
+    //metodo que envia datos seleccionado
+    private void EnviarDatosVehiculoSeleccionado(int idVehiculo) {
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select * from vehiculos where id_vehiculo = '" + idVehiculo + "'");
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                DetalleVehiculo detalle = new DetalleVehiculo();
+                detalle.setVisible(true);
+
+                DetalleVehiculo.jLabel_Placa_Detalle.setText(rs.getString("placa"));
+                DetalleVehiculo.jLabel_propietario_detalle.setText(rs.getString("propietario"));
+                DetalleVehiculo.jLabel_hora_entrada_detalle.setText(rs.getString("hora_entrada"));
+                DetalleVehiculo.jLabel_hora_salida_detalle.setText(rs.getString("hora_salida"));
+                DetalleVehiculo.jLabel_valor_pagado_detalle.setText(rs.getString("valor_pagado"));
+                DetalleVehiculo.jLabel_tipo_vehiculo_detalle.setText(rs.getString("tipo_vehiculo"));
+                DetalleVehiculo.jLabel_estado_detalle.setText(rs.getString("estado"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al seleccionar vehiculos:" + e);
+        }
+
     }
 }
-
-
-    }
-
-
